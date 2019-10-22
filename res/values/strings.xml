@@ -501,6 +501,11 @@
     <string name="gaming_mode_dynamic_title">Dynamic mode</string>
     <string name="gaming_mode_dynamic_summary">System will try to detect and add gaming apps automatically</string>
 
+    <!-- Lock Date Fonts -->
+    <string name="lock_date_font_title">Date font options</string>
+    <string name="lock_date_font_summary">Change the default font of the lockscreen date widget</string>
+    <string name="lock_date_font_dialog_title">Select lock date font</string>
+
     <!-- Omni Jaws -->
     <string name="weather_title">Weather settings</string>
     <string name="weather_summary">OmniJaws weather configs</string>

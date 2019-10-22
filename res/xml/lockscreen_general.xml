@@ -74,4 +74,14 @@
         android:summary="@string/fod_gesture_summary"
         android:defaultValue="true"
         settings:controller="com.boxer.Iron.fragments.lockscreen.FodGesturePreferenceController" />
+
+    <ListPreference
+        android:key="lock_date_fonts"
+        android:title="@string/lock_date_font_title"
+        android:dialogTitle="@string/lock_date_font_dialog_title"
+        android:entries="@array/lock_clock_fonts_entries"
+        android:entryValues="@array/lock_clock_fonts_values"
+        android:summary="%s"
+        android:defaultValue="28"
+        android:persistent="false" />
 </PreferenceScreen>
