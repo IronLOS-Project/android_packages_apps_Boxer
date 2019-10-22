@@ -52,10 +52,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private static final String KEY_PULSE_BRIGHTNESS = "ambient_pulse_brightness";
     private static final String KEY_DOZE_BRIGHTNESS = "ambient_doze_brightness";
     private static final String KEY_EDGE_LIGHTNING = "pulse_ambient_light";
+    private static final String LOCK_DATE_FONTS = "lock_date_fonts";
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
     private SystemSettingMasterSwitchPreference mEdgeLightning;
+    private ListPreference mLockDateFonts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,13 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
         mDozeBrightness.setValue(value);
         mDozeBrightness.setOnPreferenceChangeListener(this);
 
+        // Lockscren Date Fonts
+        mLockDateFonts = (ListPreference) findPreference(LOCK_DATE_FONTS);
+        mLockDateFonts.setValue(String.valueOf(Settings.System.getInt(
+                getContentResolver(), Settings.System.LOCK_DATE_FONTS, 28)));
+        mLockDateFonts.setSummary(mLockDateFonts.getEntry());
+        mLockDateFonts.setOnPreferenceChangeListener(this);
+
         mEdgeLightning = (SystemSettingMasterSwitchPreference)
                 findPreference(KEY_EDGE_LIGHTNING);
         boolean enabled = Settings.System.getIntForUser(resolver,
@@ -102,6 +111,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
             int value = (Integer) newValue;
             Settings.System.putInt(getContentResolver(),
                     Settings.System.OMNI_DOZE_BRIGHTNESS, value);
+            return true;
+         } else if (preference == mLockDateFonts) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCK_DATE_FONTS,
+                    Integer.valueOf((String) newValue));
+            mLockDateFonts.setValue(String.valueOf(newValue));
+            mLockDateFonts.setSummary(mLockDateFonts.getEntry());
             return true;
          } else if (preference == mEdgeLightning) {
             boolean value = (Boolean) newValue;
