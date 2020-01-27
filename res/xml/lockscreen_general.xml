@@ -35,4 +35,10 @@
             settings:min="1"
             android:persistent="false" />
     </PreferenceCategory>
+
+    <com.iron.support.preferences.SystemSettingSwitchPreference
+        android:key="fod_recognizing_animation"
+        android:title="@string/fod_recog_animation"
+        android:summary="@string/fod_recog_animation_summary"
+        android:defaultValue="false" />
 </PreferenceScreen>
