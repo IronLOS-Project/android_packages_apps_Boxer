@@ -31,7 +31,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.util.iron.Utils;
 
 import com.iron.support.preferences.SystemSettingSwitchPreference;
 import com.iron.support.preferences.SecureSettingSwitchPreference;
@@ -53,10 +52,13 @@ public class NavigationBar extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.navigation_bar);
 
         mInvertNavigation = findPreference(INVERT_NAVIGATION);
-        if (Utils.isThemeEnabled("com.android.internal.systemui.navbar.threebutton")) {
+        // On three button nav
+        if (com.android.internal.util.iron.Utils.isThemeEnabled("com.android.internal.systemui.navbar.threebutton")) {
             mInvertNavigation.setSummary(getString(R.string.navigation_bar_invert_layout_summary));
-        } else if (Utils.isThemeEnabled("com.android.internal.systemui.navbar.twobutton")) {
+        // On two button nav
+        } else if (com.android.internal.util.iron.Utils.isThemeEnabled("com.android.internal.systemui.navbar.twobutton")) {
             mInvertNavigation.setSummary(getString(R.string.navigation_bar_invert_layout_summary));
+        // On gesture nav
         } else {
             mInvertNavigation.setSummary(getString(R.string.unsupported_gestures));
             mInvertNavigation.setEnabled(false);
