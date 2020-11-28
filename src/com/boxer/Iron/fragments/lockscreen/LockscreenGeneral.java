@@ -20,11 +20,16 @@ import android.content.Context;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.ServiceManager;
 import android.provider.SearchIndexableResource;
 import android.os.UserHandle;
 import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -56,12 +61,14 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private static final String POCKET_JUDGE = "pocket_judge";
     private static final String KEY_EDGE_LIGHTNING = "pulse_ambient_light";
     private static final String LOCK_DATE_FONTS = "lock_date_fonts";
+    private static final String LOCK_CLOCK_FONT_STYLE = "lock_clock_font_style";
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
     private Preference mPocketJudge;
     private SystemSettingMasterSwitchPreference mEdgeLightning;
     private ListPreference mLockDateFonts;
+    private ListPreference mLockClockFonts;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +105,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
         mLockDateFonts.setSummary(mLockDateFonts.getEntry());
         mLockDateFonts.setOnPreferenceChangeListener(this);
 
+        mLockClockFonts = (ListPreference) findPreference(LOCK_CLOCK_FONT_STYLE);
+        mLockClockFonts.setValue(String.valueOf(Settings.System.getInt(
+                getContentResolver(), Settings.System.LOCK_CLOCK_FONT_STYLE, 0)));
+        mLockClockFonts.setSummary(mLockClockFonts.getEntry());
+        mLockClockFonts.setOnPreferenceChangeListener(this);
+
         mPocketJudge = (Preference) prefScreen.findPreference(POCKET_JUDGE);
         boolean mPocketJudgeSupported = res.getBoolean(
                 com.android.internal.R.bool.config_pocketModeSupported);
@@ -128,6 +141,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
                     Integer.valueOf((String) newValue));
             mLockDateFonts.setValue(String.valueOf(newValue));
             mLockDateFonts.setSummary(mLockDateFonts.getEntry());
+            return true;
+         } else if (preference == mLockClockFonts) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCK_CLOCK_FONT_STYLE,
+                    Integer.valueOf((String) newValue));
+            mLockClockFonts.setValue(String.valueOf(newValue));
+            mLockClockFonts.setSummary(mLockClockFonts.getEntry());
             return true;
          } else if (preference == mEdgeLightning) {
             boolean value = (Boolean) newValue;
