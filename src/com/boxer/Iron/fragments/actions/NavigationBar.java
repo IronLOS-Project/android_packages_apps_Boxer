@@ -60,8 +60,7 @@ public class NavigationBar extends SettingsPreferenceFragment implements
             mInvertNavigation.setSummary(getString(R.string.navigation_bar_invert_layout_summary));
         // On gesture nav
         } else {
-            mInvertNavigation.setSummary(getString(R.string.unsupported_gestures));
-            mInvertNavigation.setEnabled(false);
+            mInvertNavigation.setSummary(getString(R.string.gesture_invert_layout_summary));
         }
     }
 
