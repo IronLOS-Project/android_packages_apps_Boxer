@@ -18,6 +18,7 @@ package com.boxer.Iron.fragments.lockscreen;
 
 import android.content.Context;
 import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -30,6 +31,7 @@ import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import androidx.preference.*;
 
 import com.android.internal.logging.nano.MetricsProto;
 
@@ -44,15 +46,19 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
 
     private static final String KEY_PULSE_BRIGHTNESS = "ambient_pulse_brightness";
     private static final String KEY_DOZE_BRIGHTNESS = "ambient_doze_brightness";
+    private static final String POCKET_JUDGE = "pocket_judge";
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
+    private Preference mPocketJudge;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getActivity().getContentResolver();
         addPreferencesFromResource(R.xml.lockscreen_general);
+        final Resources res = getResources();
+        final PreferenceScreen prefScreen = getPreferenceScreen();
 
         int defaultDoze = getResources().getInteger(
                 com.android.internal.R.integer.config_screenBrightnessDoze);
@@ -73,6 +79,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
                 Settings.System.OMNI_DOZE_BRIGHTNESS, defaultDoze);
         mDozeBrightness.setValue(value);
         mDozeBrightness.setOnPreferenceChangeListener(this);
+
+        mPocketJudge = (Preference) prefScreen.findPreference(POCKET_JUDGE);
+        boolean mPocketJudgeSupported = res.getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
+        if (!mPocketJudgeSupported)
+            prefScreen.removePreference(mPocketJudge);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {

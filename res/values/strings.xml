@@ -385,4 +385,8 @@
     <string name="weather_settings_keyword">weather</string>
     <string name="status_bar_show_weather_title">Show weather</string>
     <string name="status_bar_show_weather_summary">Display the current temperature on the status bar</string>
+
+    <!-- Pocket judge -->
+    <string name="pocket_judge_title">Pocket detection</string>
+    <string name="pocket_judge_summary">Block screen inputs when device is in pocket</string>
 </resources>
