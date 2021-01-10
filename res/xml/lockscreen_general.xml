@@ -42,6 +42,13 @@
         android:title="@string/doze_on_charge_title"
         android:summary="@string/doze_on_charge_summary" />
 
+    <Preference
+        android:key="double_tap"
+        android:fragment="com.boxer.Iron.fragments.lockscreen.DoubleTapAmbientSettings"
+        android:title="@string/doze_double_tap_title"
+        android:summary="@string/doze_double_tap_summary"
+        settings:userRestriction="no_ambient_display" />
+
     <com.iron.support.preferences.SystemSettingSwitchPreference
         android:key="pocket_judge"
         android:title="@string/pocket_judge_title"
