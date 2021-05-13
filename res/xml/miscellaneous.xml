@@ -36,7 +36,4 @@
         android:summary="@string/signature_spoofing_summary"
         android:defaultValue="true" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:title="@string/signature_spoofing_footnote" />
-
 </PreferenceScreen>
