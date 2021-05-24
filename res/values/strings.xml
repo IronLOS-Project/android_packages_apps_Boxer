@@ -554,6 +554,7 @@
 
     <string name="lockscreen_fod_summary">Configure settings related to the FOD view</string>
     <string name="lockscreen_fod_category">Fingerprint On Display</string>
+    <string name="custom_fod_icon_explainer">To use your own static FOD icon, use the OPFP app. Make sure to have the animated FOD icon disabled when using a custom icon in OPFP.</string>
 
     <!-- FOD animations -->
     <string name="fod_recog_animation">Fingerprint animation</string>
