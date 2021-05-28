@@ -110,6 +110,17 @@
     <!-- About IronOS -->
     <string name="ironos_about_title">About IronOS</string>
     <string name="ironos_about_summary">A little info about the team</string>
+    <string name="ironos_telegram_title">IronOS Telegram Community</string>
+    <string name="ironos_telegram_summary"><a href="https://t.me/s/ralf979">Join our wonderful community here!</a></string>
+    <string name="ironos_github_title">IronOS Github</string>
+    <string name="ironos_github_summary"><a href="https://www.github.com/ralf979">See the IronOS source code here!</a></string>
+    <string name="ironos_about_info_summary">IronOS è il meglio del afammok</string>
+    <string name="ironos_about_team">IronOS team</string>
+    <string name="ironos_about_ralf979" translatable="false">Ralf979</string>
+    <string name="ironos_about_ralf979_summary" translatable="false">Lead Developer afammok</string>
+    <string name="about_maintainer">Maintainer</string>
+    <string name="ironos_about_maintainer">The maintainer for your device is</string>
+    <string name="ironos_about_maintainer_summary" translatable="false">Too lazy to fill this up</string>
 
     <!-- IronOS device info settings -->
     <string name="ironos_version">IronOS version</string>
