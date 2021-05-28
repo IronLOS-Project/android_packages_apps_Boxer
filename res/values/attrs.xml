@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 IronOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+
+<declare-styleable name="BubbleToggleView">
+        <attr name="ironos_icon" format="reference" />
+        <attr name="ironos_iconWidth" format="dimension" />
+        <attr name="ironos_iconHeight" format="dimension" />
+        <attr name="ironos_shape" format="reference" />
+        <attr name="ironos_shapeColor" format="color" />
+        <attr name="ironos_showShapeAlways" format="boolean" />
+        <attr name="ironos_title" format="string" />
+        <attr name="ironos_titleSize" format="dimension" />
+        <attr name="ironos_colorActive" format="color" />
+        <attr name="ironos_colorInactive" format="color" />
+        <attr name="ironos_active" format="boolean" />
+        <attr name="ironos_duration" format="integer" />
+        <attr name="ironos_padding" format="dimension" />
+        <attr name="ironos_titlePadding" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="BubbleNavigationConstraintView">
+        <attr name="ironos_mode">
+            <enum name="spread" value="0" />
+            <enum name="inside" value="1" />
+            <enum name="packed" value="2" />
+        </attr>
+    </declare-styleable>
+
+</resources>
