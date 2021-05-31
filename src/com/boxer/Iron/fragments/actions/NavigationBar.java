@@ -31,6 +31,10 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.iron.Utils;
+
+import com.iron.support.preferences.SystemSettingSwitchPreference;
+import com.iron.support.preferences.SecureSettingSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +43,24 @@ import java.util.List;
 public class NavigationBar extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 
+    private static final String INVERT_NAVIGATION = "sysui_nav_bar_inverse";
+
+    private SecureSettingSwitchPreference mInvertNavigation;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.navigation_bar);
+
+        mInvertNavigation = findPreference(INVERT_NAVIGATION);
+        if (Utils.isThemeEnabled("com.android.internal.systemui.navbar.threebutton")) {
+            mInvertNavigation.setSummary(getString(R.string.navigation_bar_invert_layout_summary));
+        } else if (Utils.isThemeEnabled("com.android.internal.systemui.navbar.twobutton")) {
+            mInvertNavigation.setSummary(getString(R.string.navigation_bar_invert_layout_summary));
+        } else {
+            mInvertNavigation.setSummary(getString(R.string.unsupported_gestures));
+            mInvertNavigation.setEnabled(false);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
