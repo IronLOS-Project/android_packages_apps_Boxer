@@ -298,4 +298,11 @@
     <string name="ambient_pulse_brightness_summary">Set brightness to use when notifcations are shown</string>
     <string name="ambient_doze_brightness_title">Ambient display brightness</string>
     <string name="ambient_doze_brightness_summary">Set brightness to use during ambient display on</string>
+
+    <!-- QS Footer Text -->
+    <string name="qs_panel_title">Panel</string>
+    <string name="qs_footer_text_title">QS footer text</string>
+    <string name="qs_footer_text_summary">Display text at bottom of QS panel</string>
+    <string name="qs_footer_text_string_title">Customize footer text</string>
+    <string name="qs_footer_text_string_summary">Set to empty for default IronLOS</string> 
 </resources>

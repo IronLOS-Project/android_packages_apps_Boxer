@@ -17,11 +17,11 @@
 package com.boxer.Iron.fragments.ui;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.*;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -32,6 +32,8 @@ import com.android.settings.Utils;
 
 import com.android.internal.logging.nano.MetricsProto;
 
+import com.iron.support.preferences.SystemSettingEditTextPreference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +41,46 @@ import java.util.List;
 public class QuickSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 
+    private static final String FOOTER_TEXT_STRING = "footer_text_string";
+
+    private SystemSettingEditTextPreference mFooterString;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.quick_settings);
+
+        PreferenceScreen prefScreen = getPreferenceScreen();
+        ContentResolver resolver = getActivity().getContentResolver();
+
+        mFooterString = (SystemSettingEditTextPreference) findPreference(FOOTER_TEXT_STRING);
+        mFooterString.setOnPreferenceChangeListener(this);
+        String footerString = Settings.System.getString(getContentResolver(),
+                FOOTER_TEXT_STRING);
+        if (footerString != null && footerString != "")
+            mFooterString.setText(footerString);
+        else {
+            mFooterString.setText("IronLOS");
+            Settings.System.putString(getActivity().getContentResolver(),
+                    Settings.System.FOOTER_TEXT_STRING, "IronLOS");
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+    	ContentResolver resolver = getActivity().getContentResolver();
+
+        if (preference == mFooterString) {
+            String value = (String) newValue;
+            if (value != "" && value != null)
+                Settings.System.putString(getActivity().getContentResolver(),
+                        Settings.System.FOOTER_TEXT_STRING, value);
+            else {
+                mFooterString.setText("IronLOS");
+                Settings.System.putString(getActivity().getContentResolver(),
+                        Settings.System.FOOTER_TEXT_STRING, "IronLOS");
+            }
+            return true;
+        }
         return false;
     }
 
