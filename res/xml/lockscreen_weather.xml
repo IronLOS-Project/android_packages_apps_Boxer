@@ -18,4 +18,23 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/lockscreen_weather_title" >
 
+    <PreferenceCategory
+            android:key="weather_general_settings"
+            android:title="@string/weather_settings_general_settings_title"
+            android:order="0">
+        <ListPreference
+                android:key="weather_temperature_unit"
+                android:entries="@array/weather_temp_unit_entries"
+                android:entryValues="@array/weather_temp_unit_values"
+                android:title="@string/weather_settings_temp_units_title"
+                android:summary="%s"
+                android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="weather_service_providers"
+        android:title="@string/weather_settings_providers_title"
+        android:order="1">
+
+    </PreferenceCategory>
 </PreferenceScreen>
