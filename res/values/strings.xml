@@ -381,4 +381,8 @@
     <string name="weather_settings_keyword">weather</string>
     <string name="status_bar_show_weather_title">Show weather</string>
     <string name="status_bar_show_weather_summary">Display the current temperature on the status bar</string>
+
+    <!-- QS titles visibility -->
+    <string name="qs_tile_title_visibility_title">Show tiles title</string>
+
 </resources>

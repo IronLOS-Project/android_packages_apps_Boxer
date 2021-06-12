@@ -72,6 +72,10 @@
             android:dependency="footer_text_show"
             android:defaultValue="IronLOS" />
 
+        <com.iron.support.preferences.SystemSettingSwitchPreference
+           android:key="qs_tile_title_visibility"
+           android:title="@string/qs_tile_title_visibility_title"
+           android:defaultValue="true" />
     </PreferenceCategory>
 
 </PreferenceScreen>
