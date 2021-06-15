@@ -42,11 +42,11 @@
         android:title="@string/headsup_title"
         android:summary="@string/headsup_summary" />
 
-    <com.android.settings.widget.CardPreference
+<!--    <com.android.settings.widget.CardPreference
         android:key="recents_category"
         android:fragment="com.boxer.Iron.fragments.ui.Recents"
         android:icon="@drawable/ic_recents_background"
         android:title="@string/recents_title"
-        android:summary="@string/recents_summary" />
+        android:summary="@string/recents_summary" /> -->
 
 </PreferenceScreen>
