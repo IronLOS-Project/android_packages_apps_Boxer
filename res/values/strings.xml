@@ -119,8 +119,8 @@
     <string name="ironos_about_ralf979" translatable="false">Ralf979</string>
     <string name="ironos_about_ralf979_summary" translatable="false">Macte Animo</string>
     <string name="about_maintainer">Maintainer</string>
-    <string name="ironos_about_maintainer">The maintainer for your device is</string>
-    <string name="ironos_about_maintainer_summary" translatable="false">Just me</string>
+    <string name="ironos_about_maintainer">My friends and helpers</string>
+    <string name="ironos_about_maintainer_summary" translatable="false">Andrea UZ (proud husband, father, bassist and android lover) and Alex Il Leone (the shy)</string>
 
     <!-- IronOS device info settings -->
     <string name="ironos_version">IronLOS version</string>
