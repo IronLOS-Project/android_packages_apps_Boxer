@@ -49,6 +49,19 @@
         android:summary="@string/doze_double_tap_summary"
         settings:userRestriction="no_ambient_display" />
 
+    <PreferenceCategory
+           android:key="edge_light_options"
+           android:title="@string/edge_light_category">
+
+    <!-- Pulse notifications lightning -->
+    <com.iron.support.preferences.SystemSettingMasterSwitchPreference
+        android:key="pulse_ambient_light"
+        android:title="@string/pulse_ambient_light_title"
+        android:summary="@string/pulse_ambient_light_summary"
+        android:fragment="com.boxer.Iron.fragments.lockscreen.EdgeLightningSettings"
+        android:defaultValue="false" />
+    </PreferenceCategory>
+
     <com.iron.support.preferences.SystemSettingSwitchPreference
         android:key="pocket_judge"
         android:title="@string/pocket_judge_title"

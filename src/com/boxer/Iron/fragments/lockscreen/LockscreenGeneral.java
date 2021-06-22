@@ -21,9 +21,11 @@ import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.os.UserHandle;
 import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -36,9 +38,14 @@ import androidx.preference.*;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.iron.support.preferences.CustomSeekBarPreference;
+import com.iron.support.preferences.SystemSettingListPreference;
+import com.iron.support.preferences.SystemSettingMasterSwitchPreference;
+import com.iron.support.preferences.SystemSettingSwitchPreference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SearchIndexable
 public class LockscreenGeneral extends SettingsPreferenceFragment implements
@@ -47,10 +54,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private static final String KEY_PULSE_BRIGHTNESS = "ambient_pulse_brightness";
     private static final String KEY_DOZE_BRIGHTNESS = "ambient_doze_brightness";
     private static final String POCKET_JUDGE = "pocket_judge";
+    private static final String KEY_EDGE_LIGHTNING = "pulse_ambient_light";
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
     private Preference mPocketJudge;
+    private SystemSettingMasterSwitchPreference mEdgeLightning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +94,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_pocketModeSupported);
         if (!mPocketJudgeSupported)
             prefScreen.removePreference(mPocketJudge);
+        mEdgeLightning = (SystemSettingMasterSwitchPreference)
+                findPreference(KEY_EDGE_LIGHTNING);
+        boolean enabled = Settings.System.getIntForUser(resolver,
+                KEY_EDGE_LIGHTNING, 0, UserHandle.USER_CURRENT) == 1;
+        mEdgeLightning.setChecked(enabled);
+        mEdgeLightning.setOnPreferenceChangeListener(this);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -99,7 +114,12 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.OMNI_DOZE_BRIGHTNESS, value);
             return true;
-         }
+         } else if (preference == mEdgeLightning) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putIntForUser(resolver, KEY_EDGE_LIGHTNING,
+                    value ? 1 : 0, UserHandle.USER_CURRENT);
+            return true;
+        }
         return false;
     }
 
