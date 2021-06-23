@@ -24,12 +24,12 @@
         android:title="@string/animations_category_title"
         android:summary="@string/animations_category_summary" />
 
- <!--    <com.android.settings.widget.CardPreference
+    <com.android.settings.widget.CardPreference
         android:key="general_notifications"
         android:fragment="com.boxer.Iron.fragments.system_misc.GeneralNotifications"
         android:icon="@drawable/ic_notifications_general_background"
         android:title="@string/general_notifications_title"
-        android:summary="@string/general_notifications_summary" /> -->
+        android:summary="@string/general_notifications_summary" />
 
     <com.android.settings.widget.CardPreference
         android:key="miscellaneous_category"
