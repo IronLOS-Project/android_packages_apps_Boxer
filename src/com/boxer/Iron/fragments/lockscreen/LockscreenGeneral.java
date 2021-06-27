@@ -32,6 +32,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import android.text.TextUtils;
 
+import com.android.internal.util.iron.FodUtils;
+
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
@@ -65,6 +67,7 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
+    private Context mContext;
     private Preference mPocketJudge;
     private SystemSettingMasterSwitchPreference mEdgeLightning;
     private ListPreference mLockDateFonts;
@@ -75,6 +78,9 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getActivity().getContentResolver();
         addPreferencesFromResource(R.xml.lockscreen_general);
+
+        mContext = getActivity();
+
         final Resources res = getResources();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
@@ -122,6 +128,20 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
                 KEY_EDGE_LIGHTNING, 0, UserHandle.USER_CURRENT) == 1;
         mEdgeLightning.setChecked(enabled);
         mEdgeLightning.setOnPreferenceChangeListener(this);
+
+        SystemSettingSwitchPreference mFodAnim = (SystemSettingSwitchPreference) findPreference("fod_recognizing_animation");
+        Preference mFodAnimList = (Preference) findPreference("fod_recognizing_animation_list");
+
+        boolean mFodAnimPkgInstalled = com.android.internal.util.iron.Utils.isPackageInstalled(getContext(),getResources()
+                .getString(com.android.internal.R.string.config_fodAnimationPackage));
+        PreferenceCategory fod = (PreferenceCategory) prefScreen.findPreference("fod_category");
+        if (!mFodAnimPkgInstalled) {
+            fod.removePreference(mFodAnim);
+            fod.removePreference(mFodAnimList);
+        }
+        if (!FodUtils.hasFodSupport(mContext)) {
+            prefScreen.removePreference(fod);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
