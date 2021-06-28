@@ -53,6 +53,7 @@ public class Miscellaneous extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 
     private static final String RINGTONE_FOCUS_MODE = "ringtone_focus_mode";
+    private static final String GAMING_MODE_ENABLED = "gaming_mode_enabled";
 
     private ListPreference mHeadsetRingtoneFocus;
 
