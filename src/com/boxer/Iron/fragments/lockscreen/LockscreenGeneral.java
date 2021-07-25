@@ -38,6 +38,7 @@ import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.widget.CardPreference;
 import androidx.preference.*;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -62,7 +63,7 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private static final String KEY_EDGE_LIGHTNING = "pulse_ambient_light";
     private static final String LOCK_DATE_FONTS = "lock_date_fonts";
     private static final String LOCK_CLOCK_FONT_STYLE = "lock_clock_font_style";
-    private static final String FOD_ANIMATIONS = "fod_animations";
+    private static final String LOCKSCREEN_FOD_CATEGORY = "lockscreen_fod_category";
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
@@ -70,13 +71,11 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private SystemSettingMasterSwitchPreference mEdgeLightning;
     private ListPreference mLockDateFonts;
     private ListPreference mLockClockFonts;
-    private PreferenceCategory mFODCategory;
+    private CardPreference mLockscreenFod;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceScreen prefSet = getPreferenceScreen();
-        Context mContext = getContext();
         ContentResolver resolver = getActivity().getContentResolver();
         addPreferencesFromResource(R.xml.lockscreen_general);
         final Resources res = getResources();
@@ -127,12 +126,11 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
         mEdgeLightning.setChecked(enabled);
         mEdgeLightning.setOnPreferenceChangeListener(this);
 
-        Resources res = mContext.getResources();
-        boolean hasFod = res.getBoolean(com.android.internal.R.bool.config_needCustomFODView);
-
-        mFODCategory = (PreferenceCategory) findPreference(FOD_ANIMATIONS);
-        if (mFODCategory != null && !hasFod) {
-            prefSet.removePreference(mFODCategory);
+        CardPreference mLockscreenFod = findPreference("lockscreen_fod_category");
+        if (!getResources().getBoolean(com.android.internal.R.bool.config_supportsInDisplayFingerprint)) {
+                    getPreferenceScreen().removePreference(mLockscreenFod);
+        } else {
+            mLockscreenFod = (CardPreference) findPreference(LOCKSCREEN_FOD_CATEGORY);
         }
     }
 

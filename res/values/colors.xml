@@ -49,6 +49,5 @@
     <color name="iron_statusbar_items_background">@*android:color/accent_device_default_light</color>
     <color name="iron_volume_rocker_background">@*android:color/accent_device_default_light</color>
 
-    <!-- FOD -->
-    <color name="fod_item_background_stroke_color">#d6d6d6</color>
+    <color name="custom_pulse_background">@*android:color/accent_device_default_light</color>
 </resources>
