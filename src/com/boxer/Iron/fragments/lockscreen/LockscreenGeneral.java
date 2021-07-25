@@ -62,6 +62,7 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private static final String KEY_EDGE_LIGHTNING = "pulse_ambient_light";
     private static final String LOCK_DATE_FONTS = "lock_date_fonts";
     private static final String LOCK_CLOCK_FONT_STYLE = "lock_clock_font_style";
+    private static final String FOD_ANIMATIONS = "fod_animations";
 
     private CustomSeekBarPreference mPulseBrightness;
     private CustomSeekBarPreference mDozeBrightness;
@@ -69,10 +70,13 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
     private SystemSettingMasterSwitchPreference mEdgeLightning;
     private ListPreference mLockDateFonts;
     private ListPreference mLockClockFonts;
+    private PreferenceCategory mFODCategory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PreferenceScreen prefSet = getPreferenceScreen();
+        Context mContext = getContext();
         ContentResolver resolver = getActivity().getContentResolver();
         addPreferencesFromResource(R.xml.lockscreen_general);
         final Resources res = getResources();
@@ -122,6 +126,14 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
                 KEY_EDGE_LIGHTNING, 0, UserHandle.USER_CURRENT) == 1;
         mEdgeLightning.setChecked(enabled);
         mEdgeLightning.setOnPreferenceChangeListener(this);
+
+        Resources res = mContext.getResources();
+        boolean hasFod = res.getBoolean(com.android.internal.R.bool.config_needCustomFODView);
+
+        mFODCategory = (PreferenceCategory) findPreference(FOD_ANIMATIONS);
+        if (mFODCategory != null && !hasFod) {
+            prefSet.removePreference(mFODCategory);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {

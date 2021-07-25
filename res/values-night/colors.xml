@@ -21,4 +21,6 @@
     <color name="default_inactive_color">#A0A0A0</color>
     <color name="default_iron_inactive_color">#FFA0A0A0</color>
 
+    <color name="fod_item_background_stroke_color">#555555</color>
+
 </resources>
