@@ -127,7 +127,7 @@ public class LockscreenGeneral extends SettingsPreferenceFragment implements
         mEdgeLightning.setOnPreferenceChangeListener(this);
 
         CardPreference mLockscreenFod = findPreference("lockscreen_fod_category");
-        if (!getResources().getBoolean(com.android.internal.R.bool.config_supportsInDisplayFingerprint)) {
+        if (!getResources().getBoolean(com.android.internal.R.bool.config_needCustomFODView)) {
                     getPreferenceScreen().removePreference(mLockscreenFod);
         } else {
             mLockscreenFod = (CardPreference) findPreference(LOCKSCREEN_FOD_CATEGORY);
