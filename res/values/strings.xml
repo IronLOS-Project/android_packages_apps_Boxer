@@ -41,6 +41,7 @@
     <string name="volume_rocker_summary">Set default behavior and actions for vol +/- keys</string>
     <string name="hw_keys_title">Hardware keys</string>
     <string name="hw_keys_summary">Assign actions for physical navigation buttons</string>
+    <string name="fod_category">FOD</string>
 
     <!-- Interface -->
     <string name="quick_settings_title">Quick settings</string>
